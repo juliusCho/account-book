@@ -1,0 +1,22 @@
+.Head {
+    border-bottom: 1.5px solid #c2c2c2;
+    padding: 20px 0 24px 0;
+}
+
+.title {
+    margin-bottom: 10px;
+    color: #343a40;
+    display: flex;
+}
+
+.Head h1 {
+    font-size: 36px;
+}
+.Head h3 {
+    font-size: 24px;
+}
+
+.title b {
+    color: #f80000;
+    margin-left: 10px;
+}
