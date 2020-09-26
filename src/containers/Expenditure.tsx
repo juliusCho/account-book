@@ -4,10 +4,10 @@ import Head from "../components/Head";
 import TodayList from '../components/TodayList';
 import ItemCreate from "../components/ItemCreate";
 import Category from "../components/Category";
-import {CategoryAction, CategoryType, ExpenditureAction, ExpenditureType} from "../modules/types";
+import {CategoryAction, CategoryType, ExpenditureAction, ExpenditureType, NewExpenditure} from "../modules/types";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../modules/reducer";
-import {setCat} from "../modules/actions";
+import {createExpenditure, deleteExpenditure, setCat, updateExpenditure} from "../modules/actions";
 import {Dispatch} from "redux";
 
 function getTotalCost(expenditureList: ExpenditureType[]): number {
@@ -29,18 +29,31 @@ export default function Expenditure(): JSX.Element {
     const changeCat = (category: CategoryType) => {
         catDispatcher(setCat(category));
     };
+    const addExpenditure = (expenditure: NewExpenditure) => {
+        expDispatcher(createExpenditure(expenditure, category));
+    };
+    const changeExpenditure = (expenditure: ExpenditureType) => {
+        expDispatcher(updateExpenditure(expenditure, category));
+    };
+    const removeExpenditure = (id: number) => {
+        expDispatcher(deleteExpenditure(id, category));
+    };
 
     useEffect(() => {
         totalCost = getTotalCost(expenditureList);
-    }, [category, expenditureList]);
+    }, [catDispatcher, expDispatcher]);
 
     return (
         <div className={styles.Expenditure}>
             <div>
                 <Head total={totalCost}/>
                 <Category category={category} changeCat={changeCat}/>
-                <TodayList expenditureList={expenditureList}/>
-                <ItemCreate/>
+                <TodayList
+                    expenditureList={expenditureList}
+                    changeExpenditure={changeExpenditure}
+                    removeExpenditure={removeExpenditure}
+                />
+                <ItemCreate addExpenditure={addExpenditure}/>
             </div>
         </div>
     );

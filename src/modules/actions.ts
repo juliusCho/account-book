@@ -9,16 +9,17 @@ import {
 
 export const setCat = (category: CategoryType): CategoryAction => ({type: SET_CAT, category});
 
-export const listAction = (category: CategoryType | undefined): ExpenditureAction => ({type: EXP_LIST, category});
+export const createExpenditure = (
+    expenditure: NewExpenditure,
+    category: CategoryType
+): ExpenditureAction => ({type: CREATE, expenditure, category});
 
-export const createAction = (
-    {expenditure, category}: {expenditure: NewExpenditure, category: CategoryType}
-    ): ExpenditureAction => ({type: CREATE, expenditure, category});
+export const updateExpenditure = (
+    expenditure: ExpenditureType,
+    category: CategoryType
+): ExpenditureAction => ({type: UPDATE, expenditure, category});
 
-export const updateAction = (
-    {expenditure, category}: {expenditure: ExpenditureType, category: CategoryType}
-    ): ExpenditureAction => ({type: UPDATE, expenditure, category});
-
-export const deleteAction = (
-    {id, category}: {id: number, category: CategoryType}
-    ): ExpenditureAction => ({type: DELETE, id, category});
+export const deleteExpenditure = (
+    id: number,
+    category: CategoryType
+): ExpenditureAction => ({type: DELETE, id, category});
