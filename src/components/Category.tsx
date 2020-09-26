@@ -1,10 +1,12 @@
 import React from "react";
-import styles from './Category.module.css';
+import styles from '../css/Category.module.css';
+import { categoryApi } from "../api/expenditureApi";
 
 export default function Category(): JSX.Element {
-    const categories = [
-        '식사', '식료품', '교통', '생활', '의료'
-    ];
+    const apiResponse = categoryApi();
+    if (apiResponse.code !== 200) return <div className={styles.Category}>오류발생</div>;
+
+    const categories = apiResponse.data;
 
     return (
         <div className={styles.Category}>
@@ -12,7 +14,7 @@ export default function Category(): JSX.Element {
                 카테고리별로 보기:
                 <select name="categories" className="categories">
                     {categories.map(category => (
-                        <option value={category}>{category}</option>
+                        <option value={category.id} key={category.id}>{category.label}</option>
                     ))}
                 </select>
             </h3>

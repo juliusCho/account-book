@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import axios from 'axios';
+import reducer from "./modules/reducer";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/' : 'http://127.0.0.1:3000';
+const store = createStore(reducer);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

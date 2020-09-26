@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Head.module.css';
+import styles from '../css/Head.module.css';
 
 function moneyFormat(total: number = 0): string {
     let totalStrs: string[] = String(total).split('');

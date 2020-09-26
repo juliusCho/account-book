@@ -1,7 +1,9 @@
-import React from "react";
-import styles from './Expenditure.module.css';
-import Head from "./Head";
-import Category from "./Category";
+import React, {useState} from "react";
+import styles from '../css/Expenditure.module.css';
+import Head from "../components/Head";
+import Category from "../components/Category";
+import TodayList from '../components/TodayList';
+import ItemCreate from "../components/ItemCreate";
 
 export default function Expenditure(): JSX.Element {
     return (
@@ -9,6 +11,8 @@ export default function Expenditure(): JSX.Element {
             <div>
                 <Head total={0}/>
                 <Category/>
+                <TodayList/>
+                <ItemCreate/>
             </div>
         </div>
     );

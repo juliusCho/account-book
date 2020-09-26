@@ -1,10 +1,9 @@
-import React from 'react';
-import './App.css';
+import React  from 'react';
 import Expenditure from "./containers/Expenditure";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Expenditure/>
     </div>
   );
