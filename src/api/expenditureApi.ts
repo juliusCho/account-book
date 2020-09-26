@@ -1,4 +1,4 @@
-import { NewExpenditure, Expenditure, Category } from "../modules/types";
+import { NewExpenditure, ExpenditureType, CategoryType } from "../modules/types";
 
 export type ApiResponse<T> = {
     code: number;
@@ -16,9 +16,9 @@ const apiResponse = <T>(data: T, message?: string): ApiResponse<T> => ({
 
 class ApiServer {
     constructor(
-        public _categories: Category[],
+        public _categories: CategoryType[],
         private _nextId: number,
-        public _expenditures: Expenditure[]
+        public _expenditures: ExpenditureType[]
     ) {}
 
     get categories() {
@@ -29,7 +29,7 @@ class ApiServer {
         return this._expenditures;
     }
 
-    expenditureList(category: Category): Expenditure[] {
+    expenditureList(category: CategoryType): ExpenditureType[] {
         return this._expenditures.filter(expenditure => category.id === expenditure.category.id);
     }
     insertExpenditure(expenditure: NewExpenditure): void {
@@ -40,7 +40,7 @@ class ApiServer {
         });
         this._nextId++;
     }
-    updateExpenditure(expenditure: Expenditure): void {
+    updateExpenditure(expenditure: ExpenditureType): void {
         this._expenditures = this._expenditures.map(exp =>
             exp.id === expenditure.id
                 ? expenditure
@@ -99,11 +99,11 @@ const apiServer = new ApiServer([
     }
 ]);
 
-export function categoryApi(): ApiResponse<Category[]> {
+export function categoryApi(): ApiResponse<CategoryType[]> {
     return apiResponse(apiServer.categories);
 };
 
-export function selectApi(category: Category | undefined = {id: 0}): ApiResponse<Expenditure[]> {
+export function selectApi(category: CategoryType | undefined = {id: 0}): ApiResponse<ExpenditureType[]> {
     if (category.id === 0) return apiResponse(apiServer.expenditures);
     return apiResponse(apiServer.expenditureList(category));
 };
@@ -113,7 +113,7 @@ export function insertApi(data: NewExpenditure): ApiResponse<number> {
     return apiResponse(1, 'Insert Request Success!');
 };
 
-export function updateApi(data: Expenditure): ApiResponse<number> {
+export function updateApi(data: ExpenditureType): ApiResponse<number> {
     apiServer.updateExpenditure(data);
     return apiResponse(1, 'Update Request Success!');
 };

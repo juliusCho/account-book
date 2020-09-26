@@ -1,12 +1,12 @@
-export type Category = { id: number; label?: string; };
+export type CategoryType = { id: number; label?: string; };
 
 export interface NewExpenditure {
-    category: Category;
+    category: CategoryType;
     title: string;
     cost: number;
 };
 
-export interface Expenditure extends NewExpenditure {
+export interface ExpenditureType extends NewExpenditure {
     id: number;
     onUpdate: boolean;
 };
@@ -17,11 +17,11 @@ export const CREATE = 'CREATE' as const;
 export const UPDATE = 'UPDATE' as const;
 export const DELETE = 'DELETE' as const;
 
-export type CategoryAction = { type: 'SET_CAT', category: Category };
+export type CategoryAction = { type: 'SET_CAT', category: CategoryType };
 export type ExpenditureAction =
-    { type: 'EXP_LIST', category: Category | undefined } |
-    { type: 'CREATE', category: Category, expenditure: NewExpenditure } |
-    { type: 'UPDATE', category: Category, expenditure: Expenditure } |
-    { type: 'DELETE', category: Category, id: number };
+    { type: 'EXP_LIST', category: CategoryType | undefined } |
+    { type: 'CREATE', category: CategoryType, expenditure: NewExpenditure } |
+    { type: 'UPDATE', category: CategoryType, expenditure: ExpenditureType } |
+    { type: 'DELETE', category: CategoryType, id: number };
 
 export {}

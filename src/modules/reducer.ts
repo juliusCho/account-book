@@ -1,7 +1,7 @@
 import {
-    Expenditure,
+    ExpenditureType,
     ExpenditureAction,
-    SET_CAT, CREATE, UPDATE, DELETE, Category, CategoryAction
+    SET_CAT, CREATE, UPDATE, DELETE, CategoryType, CategoryAction
 } from "./types";
 import {
     ApiResponse,
@@ -9,7 +9,7 @@ import {
 } from "../api/expenditureApi";
 import { combineReducers } from "redux";
 
-const category = (state: Category, action: CategoryAction): Category => {
+const category = (state: CategoryType, action: CategoryAction): CategoryType => {
     switch (action.type) {
         case SET_CAT:
             return action?.category || {id: 0};
@@ -20,7 +20,7 @@ const category = (state: Category, action: CategoryAction): Category => {
     }
 }
 
-const expenditure = (state: Expenditure, action: ExpenditureAction): Expenditure[] => {
+const expenditure = (state: ExpenditureType, action: ExpenditureAction): ExpenditureType[] => {
     let response: ApiResponse<number> = {code: 415, data: 0, error: false};
 
     switch (action.type) {
