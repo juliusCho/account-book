@@ -8,7 +8,7 @@ import {
     ITEM_CHANGE_CAT,
     ITEM_CHANGE_COST,
     ITEM_CHANGE_TITLE,
-    ItemActionType,
+    ItemActionType, NewExpenditure,
     SET_CAT,
     UPDATE
 } from "./types";
@@ -59,9 +59,7 @@ export type RootState = ReturnType<typeof reducer>;
 
 
 
-
-
-export function itemReducer(state: ExpenditureType, action: ItemActionType): ExpenditureType {
+export function itemReducer<T>(state: T, action: ItemActionType): T {
     switch (action.type) {
         case ITEM_CHANGE_CAT:
             return {

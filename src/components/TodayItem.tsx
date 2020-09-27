@@ -1,9 +1,18 @@
-import React, {ChangeEvent, useEffect, useReducer} from "react";
+import React, {ChangeEvent, useReducer, useState} from "react";
 import styles from '../css/TodayItem.module.css';
 import {MdClear, MdCreate, MdDelete, MdDone} from "react-icons/md";
-import {CategoryType, ExpenditureType, ITEM_CHANGE_CAT, ITEM_CHANGE_COST, ITEM_CHANGE_TITLE} from "../modules/types";
+import {
+    CategoryType,
+    ExpenditureType,
+    ITEM_CHANGE_CAT,
+    ITEM_CHANGE_COST,
+    ITEM_CHANGE_TITLE,
+    ItemActionType
+} from "../modules/types";
 import {moneyFormat} from "../lib/formatter";
 import {itemReducer} from "../modules/reducer";
+import Categories from "./Categories";
+import {validator} from "../lib/formValidator";
 
 type TodayItemArgs = {
     changeExpenditure: (expenditure: ExpenditureType) => void;
@@ -27,13 +36,20 @@ export default React.memo(function TodayItem(
         color, categories
     }: TodayItemArgs
 ): JSX.Element {
-    const [item, dispatch] = useReducer(itemReducer, {id, category, title, cost, onUpdate});
+    const reducer: (state: ExpenditureType, action: ItemActionType) => ExpenditureType = itemReducer;
+    const [item, dispatch] = useReducer(reducer, {id, category, title, cost, onUpdate});
 
-    const onChangeCat = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch({type: ITEM_CHANGE_CAT, category: {
-            id: Number(e.target.value),
-            label: e.target.options[e.target.selectedIndex].text
-        }});
+    const [invalid, setInvalid] = useState(false);
+
+    function initialize() {
+        dispatch({type: ITEM_CHANGE_CAT, category});
+        dispatch({type: ITEM_CHANGE_TITLE, title});
+        dispatch({type: ITEM_CHANGE_COST, cost});
+        setInvalid(false);
+    }
+
+    const changeCat = (changedCat: CategoryType) => {
+        dispatch({type: ITEM_CHANGE_CAT, category: changedCat});
     };
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -50,31 +66,30 @@ export default React.memo(function TodayItem(
         }
     };
     const onSubmit = () => {
-        changeExpenditure(item);
+        if (validator(item)) {
+            changeExpenditure(item);
+            setInvalid(false);
+        } else {
+            setInvalid(true);
+        }
     };
     const toggleUpdate = () => {
         changeExpenditure({id, category, title, cost, onUpdate: !onUpdate});
+        initialize();
     };
 
     return onUpdate ? (
         <div className={`${styles.TodayItem} ${styles.highlight}`}>
             <div className={styles.box}>
-                <select
-                    name="categories"
-                    className={styles.categorySelect}
-                    onChange={onChangeCat}
-                >
-                    {categories.map(category => (
-                        <option
-                            selected={category.id === item.category.id}
-                            value={category.id}
-                            key={category.id}>
-                            {category.label}
-                        </option>
-                    ))}
-                </select>
+                <Categories
+                    categories={categories}
+                    changeCat={changeCat}
+                    inputStyle={{marginRight: '10px'}}
+                    orgCatId={item.category.id}
+                />
                 <input
-                    className={styles.input}
+                    placeholder="지출 내용을 입력하세요."
+                    className={`${styles.input} ${invalid && styles.invalid}`}
                     name="title"
                     value={item.title}
                     style={{width: '125px', marginRight: 0}}
@@ -83,6 +98,7 @@ export default React.memo(function TodayItem(
             </div>
             <div className={styles.box}>
                 <input
+                    placeholder="지출 금액을 입력하세요."
                     type="number"
                     className={styles.input}
                     name="cost"
