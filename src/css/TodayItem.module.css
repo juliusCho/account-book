@@ -4,6 +4,12 @@
     margin: 10px 0 10px 0;
 }
 
+.highlight {
+    border: 2px solid #fffd84;
+    border-radius: 5px;
+    background: #fff2bc;
+}
+
 .box {
     display: flex;
     align-items: center;
@@ -37,10 +43,17 @@
 .icon {
     font-size: 25px;
     color: #43484e;
+    margin-left: 10px;
+}
+
+.icon:hover {
+    color: #f80000;
+    font-size: 30px;
+    margin-left: 5px;
 }
 
 .input {
     padding: 5px;
     width: 100px;
-    margin-right: 20px;
+    margin-right: 10px;
 }

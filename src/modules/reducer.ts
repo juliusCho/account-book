@@ -1,13 +1,19 @@
 import {
-    ExpenditureType,
+    CategoryAction,
+    CategoryType,
+    CREATE,
+    DELETE,
     ExpenditureAction,
-    SET_CAT, CREATE, UPDATE, DELETE, CategoryType, CategoryAction
+    ExpenditureType,
+    ITEM_CHANGE_CAT,
+    ITEM_CHANGE_COST,
+    ITEM_CHANGE_TITLE,
+    ItemActionType,
+    SET_CAT,
+    UPDATE
 } from "./types";
-import {
-    ApiResponse,
-    deleteApi, insertApi, selectApi, updateApi
-} from "../api/expenditureApi";
-import { combineReducers } from "redux";
+import {ApiResponse, deleteApi, insertApi, selectApi, updateApi} from "../api/expenditureApi";
+import {combineReducers} from "redux";
 
 const category = (state: CategoryType, action: CategoryAction): CategoryType => {
     switch (action.type) {
@@ -49,3 +55,30 @@ const reducer = combineReducers({category, expenditure});
 export default reducer;
 
 export type RootState = ReturnType<typeof reducer>;
+
+
+
+
+
+
+export function itemReducer(state: ExpenditureType, action: ItemActionType): ExpenditureType {
+    switch (action.type) {
+        case ITEM_CHANGE_CAT:
+            return {
+                ...state,
+                category: action.category
+            };
+        case ITEM_CHANGE_TITLE:
+            return {
+                ...state,
+                title: action.title
+            };
+        case ITEM_CHANGE_COST:
+            return {
+                ...state,
+                cost: action.cost
+            };
+        default:
+            throw new Error('unhandled reducer at todayitem');
+    }
+};

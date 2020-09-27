@@ -1,6 +1,7 @@
 import React from "react";
 import styles from '../css/ItemCreate.module.css';
 import {CategoryType, NewExpenditure} from "../modules/types";
+import { MdAdd } from "react-icons/all";
 
 type ItemCreateArgs = {
     categories: CategoryType[];

@@ -28,4 +28,14 @@ export type ExpenditureAction =
     { type: 'UPDATE', category: CategoryType, expenditure: ExpenditureType } |
     { type: 'DELETE', category: CategoryType, id: number };
 
+export const ITEM_CHANGE_CAT = 'item/CHANGE_CAT' as const;
+export const ITEM_CHANGE_TITLE = 'item/CHANGE_TITLE' as const;
+export const ITEM_CHANGE_COST = 'item/CHANGE_COST' as const;
+
+export type ItemActionType =
+    {type: 'item/CHANGE_CAT'; category: CategoryType} |
+    {type: 'item/CHANGE_TITLE'; title: string} |
+    {type: 'item/CHANGE_COST'; cost: number};
+
+
 export {}

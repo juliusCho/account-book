@@ -15,7 +15,15 @@ export default function TodayList(
           expenditureList, changeExpenditure, removeExpenditure, categories
     }: TodayListArgs
 ): JSX.Element {
-    return (
+    return expenditureList.length === 0
+        ? (
+            <div
+                className={styles.TodayList}
+                style={{fontWeight: 700, color: '#43484e', marginTop: '10px'}}
+            >
+                지출 내역이 없습니다.
+            </div>
+        ) : (
         <>
             <div className={styles.TodayList}>
                 {expenditureList.map(expenditure => (
