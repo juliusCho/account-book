@@ -18,7 +18,7 @@ const category = (state: CategoryType, action: CategoryAction): CategoryType => 
             // console.log({...response, message: 'Unhandled action type for reducer'});
             return state || {id: 0};
     }
-}
+};
 
 const expenditure = (state: ExpenditureType, action: ExpenditureAction): ExpenditureType[] => {
     let response: ApiResponse<number> = {code: 415, data: 0, error: false};

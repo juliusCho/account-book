@@ -1,19 +1,14 @@
 import React, {ChangeEvent} from "react";
 import styles from '../css/Category.module.css';
-import { categoryApi } from "../api/expenditureApi";
 import {CategoryType} from "../modules/types";
 
 type CategoryArgs = {
     category: CategoryType;
+    categories: CategoryType[];
     changeCat: (category: CategoryType) => void;
 };
 
-export default React.memo(function Category({category, changeCat}: CategoryArgs): JSX.Element {
-    const apiResponse = categoryApi();
-    if (apiResponse.error) return <div className={styles.Category}>오류발생</div>;
-
-    const categories = apiResponse.data;
-
+export default React.memo(function Category({category, categories, changeCat}: CategoryArgs): JSX.Element {
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
         changeCat({
             id: Number(e.target.value),
@@ -25,7 +20,7 @@ export default React.memo(function Category({category, changeCat}: CategoryArgs)
         <div className={styles.Category}>
             <h3>
                 카테고리별로 보기:
-                <select name="categories" className="categories" onChange={onChange}>
+                <select name="categories" onChange={onChange}>
                     {categories.map(category => (
                         <option
                             value={category.id}

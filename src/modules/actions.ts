@@ -1,11 +1,10 @@
 import {
-    SET_CAT, EXP_LIST, CREATE, UPDATE, DELETE,
+    SET_CAT, CREATE, UPDATE, DELETE,
     ExpenditureAction,
     NewExpenditure,
     ExpenditureType,
     CategoryType, CategoryAction
 } from "./types";
-
 
 export const setCat = (category: CategoryType): CategoryAction => ({type: SET_CAT, category});
 

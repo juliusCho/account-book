@@ -1,4 +1,8 @@
-export type CategoryType = { id: number; label?: string; };
+export type CategoryType = {
+    id: number;
+    label?: string;
+    color?: string;
+};
 
 export interface NewExpenditure {
     category: CategoryType;

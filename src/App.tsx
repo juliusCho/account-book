@@ -1,7 +1,7 @@
 import React  from 'react';
 import Expenditure from "./containers/Expenditure";
 
-function App() {
+function App(): JSX.Element {
   return (
     <div>
       <Expenditure/>

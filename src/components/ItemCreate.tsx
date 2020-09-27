@@ -1,12 +1,13 @@
 import React from "react";
 import styles from '../css/ItemCreate.module.css';
-import {NewExpenditure} from "../modules/types";
+import {CategoryType, NewExpenditure} from "../modules/types";
 
 type ItemCreateArgs = {
+    categories: CategoryType[];
     addExpenditure: (expenditure: NewExpenditure) => void;
-}
+};
 
-export default function ItemCreate({addExpenditure}: ItemCreateArgs): JSX.Element {
+export default function ItemCreate({categories, addExpenditure}: ItemCreateArgs): JSX.Element {
 
 
 

@@ -1,4 +1,46 @@
 .TodayItem {
     display: flex;
+    justify-content: space-between;
+    margin: 10px 0 10px 0;
+}
+
+.box {
+    display: flex;
     align-items: center;
+}
+
+.categoryLbl {
+    padding: 10px 17px 10px 17px;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.categorySelect {
+    font-weight: 700;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.label {
+    font-weight: 700;
+    color: #43484e;
+}
+
+.label b {
+    color: #f80000;
+    margin-right: 20px;
+}
+
+.icon {
+    font-size: 25px;
+    color: #43484e;
+}
+
+.input {
+    padding: 5px;
+    width: 100px;
+    margin-right: 20px;
 }

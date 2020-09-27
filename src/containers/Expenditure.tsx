@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../modules/reducer";
 import {createExpenditure, deleteExpenditure, setCat, updateExpenditure} from "../modules/actions";
 import {Dispatch} from "redux";
+import {categoryApi} from "../api/expenditureApi";
 
 function getTotalCost(expenditureList: ExpenditureType[]): number {
     return expenditureList.length === 0
@@ -17,6 +18,10 @@ function getTotalCost(expenditureList: ExpenditureType[]): number {
             .map(expenditure => expenditure.cost)
             .reduce((acc, next) => acc + next);
 }
+
+const apiResponse = categoryApi();
+const searchCategories = apiResponse.error ? [] : apiResponse.data;
+const categories = searchCategories.filter(category => category.id !== 0);
 
 export default function Expenditure(): JSX.Element {
     const category: CategoryType = useSelector((state: RootState) => state.category);
@@ -45,16 +50,24 @@ export default function Expenditure(): JSX.Element {
 
     return (
         <div className={styles.Expenditure}>
-            <div>
+            <div className={styles.template}>
                 <Head total={totalCost}/>
-                <Category category={category} changeCat={changeCat}/>
+                <Category
+                    category={category}
+                    categories={searchCategories}
+                    changeCat={changeCat}
+                />
                 <TodayList
                     expenditureList={expenditureList}
                     changeExpenditure={changeExpenditure}
                     removeExpenditure={removeExpenditure}
+                    categories={categories}
                 />
-                <ItemCreate addExpenditure={addExpenditure}/>
+                <ItemCreate
+                    categories={categories}
+                    addExpenditure={addExpenditure}
+                />
             </div>
         </div>
     );
-}
+};

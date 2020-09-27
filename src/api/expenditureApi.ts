@@ -53,11 +53,11 @@ class ApiServer {
 }
 const apiServer = new ApiServer([
         {id: 0, label: '전체'},
-        {id: 1, label: '식사'},
-        {id: 2, label: '식료품'},
-        {id: 3, label: '교통'},
-        {id: 4, label: '생활'},
-        {id: 5, label: '의료'}
+        {id: 1, label: '식사', color: '#ffec8c'},
+        {id: 2, label: '식료품', color: '#d5ffbe'},
+        {id: 3, label: '교통', color: '#ffd2be'},
+        {id: 4, label: '생활', color: '#f1beff'},
+        {id: 5, label: '의료', color: '#bec9ff'}
     ],
 
 6,

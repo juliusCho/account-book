@@ -1,17 +1,18 @@
 import React from "react";
 import styles from '../css/TodayList.module.css';
 import TodayItem from "./TodayItem";
-import {ExpenditureType} from "../modules/types";
+import {CategoryType, ExpenditureType} from "../modules/types";
 
 type TodayListArgs = {
     expenditureList: ExpenditureType[];
     changeExpenditure: (expenditure: ExpenditureType) => void;
     removeExpenditure: (id: number) => void;
+    categories: CategoryType[];
 };
 
 export default function TodayList(
     {
-          expenditureList, changeExpenditure, removeExpenditure
+          expenditureList, changeExpenditure, removeExpenditure, categories
     }: TodayListArgs
 ): JSX.Element {
     return (
@@ -23,6 +24,8 @@ export default function TodayList(
                         changeExpenditure={changeExpenditure}
                         removeExpenditure={removeExpenditure}
                         {...expenditure}
+                        color={categories.find(cat => cat.id === expenditure.category.id)?.color || 'white'}
+                        categories={categories}
                     />
                 ))}
             </div>

@@ -1,5 +1,5 @@
 .TodayList {
     flex: 1;
-    padding: 20px 32px 48px 32px;
+    padding: 10px 0 48px 0;
     overflow-y: auto;
 }
