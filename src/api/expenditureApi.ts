@@ -51,6 +51,7 @@ class ApiServer {
         this._expenditures = this._expenditures.filter(expenditure => expenditure.id !== id);
     }
 }
+
 const apiServer = new ApiServer([
         {id: 0, label: '전체'},
         {id: 1, label: '식사', color: '#ffec8c'},

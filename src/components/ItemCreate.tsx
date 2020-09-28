@@ -43,9 +43,11 @@ export default function ItemCreate({categories, addExpenditure}: ItemCreateArgs)
         }
         setOpen(!open);
     }, [open]);
+
     const changeCat = (changedCat: CategoryType) => {
         dispatch({type: ITEM_CHANGE_CAT, category: changedCat});
     };
+
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         if (name === 'title') {

@@ -27,7 +27,6 @@ export default function Categories({categories, changeCat, inputStyle, orgCatId 
         >
             {categories.map(category => (
                 <option
-                    // selected={category.id === orgCatId ? true : false}
                     value={category.id}
                     key={category.id}>
                     {category.label}

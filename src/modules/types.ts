@@ -37,5 +37,4 @@ export type ItemActionType =
     {type: 'item/CHANGE_TITLE'; title: string} |
     {type: 'item/CHANGE_COST'; cost: number};
 
-
-export {}
+export {};

@@ -8,7 +8,7 @@ import {
     ITEM_CHANGE_CAT,
     ITEM_CHANGE_COST,
     ITEM_CHANGE_TITLE,
-    ItemActionType, NewExpenditure,
+    ItemActionType,
     SET_CAT,
     UPDATE
 } from "./types";

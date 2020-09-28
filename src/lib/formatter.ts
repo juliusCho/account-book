@@ -13,4 +13,4 @@ export function moneyFormat(total: number = 0): string {
         }
     }
     return result;
-}
+};
